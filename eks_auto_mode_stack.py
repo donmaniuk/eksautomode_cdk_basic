@@ -74,15 +74,6 @@ class EksAutoModeStack(Stack):
             ]
         )
 
-        ## Add STS assume role permission
-        #node_role.add_to_policy(iam.PolicyStatement(
-        #    effect=iam.Effect.ALLOW,
-        #    actions=[
-        #        "sts:AssumeRole"
-        #    ],
-        #    resources=["*"]  # Specify the resources this policy applies to
-        #))
-
         # Create EKS Cluster with Auto Mode
         cluster = eks.CfnCluster(
             self, "EKSAutoModeCluster",
@@ -118,15 +109,7 @@ class EksAutoModeStack(Stack):
                 authentication_mode="API",
                 bootstrap_cluster_creator_admin_permissions=False
             ),
-            ## Logging configuration
-            #logging=eks.CfnCluster.LoggingProperty(
-            #    cluster_logging=[
-            #        eks.CfnCluster.LoggingTypeProperty(
-            #            enabled=True,
-            #            types=["api", "audit", "authenticator", "controllerManager", "scheduler"]
-            #        )
-            #    ]
-            #),
+            
             # Upgrade policy
             upgrade_policy=eks.CfnCluster.UpgradePolicyProperty(
                 support_type="STANDARD"
