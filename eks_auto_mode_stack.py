@@ -42,7 +42,7 @@ class EksAutoModeStack(Stack):
         for subnet in vpc.private_subnets:
             Tags.of(subnet).add("kubernetes.io/role/internal-elb", "1")
         
-        # Create cluster IAM role with the enhanced trust relationship
+        # Create cluster IAM role for the cluster
         cluster_role = iam.Role(
             self, "EKSAutoModeClusterRole",
             assumed_by=iam.ServicePrincipal("eks.amazonaws.com"),  # Basic trust relationship
